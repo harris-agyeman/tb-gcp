@@ -21,6 +21,16 @@ cd /opt/tb/repo/tb-gcp-tr/landingZone/no-itop
 #Retrieve terraform vars
 source input.auto.tfvars
 
+# folder or organization
+echo "root = ${root_id}"
+result=`sudo gcloud organizations describe $root_id --format=text`
+if echo $result | grep 'ACTIVE'; then
+    echo "${root_id} is an organization"
+    root_is_org='true'
+fi
+echo "root_is_org = ${root_is_org}"
+
+
 # Create TF state bucket
 sudo gsutil mb "gs://${terraform_state_bucket_name}/"
 
