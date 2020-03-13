@@ -33,6 +33,12 @@ variable "billing_account_id" {
   description = "Id of billing account to which bootstrap project will be assigned"
 }
 
+variable "root_is_org" {
+  type        = string
+  description = "is root_id an organization - true or false"
+  default     = "false"
+}
+
 variable "tb_discriminator" {
   type        = string
   description = "sufix added to the names/IDs such elements like Tranquility Base folder, Bootstrap project what allows their coexistence with other sibling TBase instances within the same Organisation/Folder. Example: 'uat', 'dev-am', ''. For the empty value no suffix will be added (thus production ready)."
