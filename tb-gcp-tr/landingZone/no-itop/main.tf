@@ -61,6 +61,7 @@ module "folder_structure" {
   tb_discriminator = var.tb_discriminator
 }
 
+
 module "shared_projects" {
   source = "../../shared-projects-creation"
 
@@ -72,6 +73,7 @@ module "shared_projects" {
   shared_operations_project_name = var.shared_operations_project_name
   shared_billing_project_name    = var.shared_billing_project_name
   tb_bastion_project_name = var.tb_bastion_project_name
+  tb_discriminator = var.tb_discriminator
 }
 
 module "apis_activation" {

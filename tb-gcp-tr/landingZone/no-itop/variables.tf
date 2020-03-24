@@ -13,6 +13,13 @@
 # limitations under the License.
 
 #FOLDER STRUCTURE CREATION
+variable "tb_discriminator" {
+  type        = string
+  default     = ""
+  description = "sufix added to the Tranquility Base folder allowing coexistence of other TBase instances within the same Organisation/Folder. Example: 'uat', 'dev-am'. Default value is empty so no suffix will be added."
+}
+
+
 variable "region" {
   type        = string
   description = "region name."
@@ -32,12 +39,6 @@ variable "root_is_org" {
   type        = string
   default     = "false"
   description = "determines whether root directory is an org or a directory inside an org."
-}
-
-variable "tb_discriminator" {
-  type        = string
-  default     = ""
-  description = "sufix added to the Tranquility Base folder allowing coexistence of other TBase instances within the same Organisation/Folder. Example: 'uat', 'dev-am'. Default value is empty so no suffix will be added."
 }
 
 #SHARED PROJECTS CREATION

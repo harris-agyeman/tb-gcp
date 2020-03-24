@@ -41,8 +41,10 @@ export HOME=/root
 
 #Retrieve project ID
 PROJECT_ID=$(curl -s "http://metadata.google.internal/computeMetadata/v1/project/project-id" -H "Metadata-Flavor: Google")
+echo "${PROJECT_ID}"
+TB_DISCRIMINATOR=${tb_discriminator}
 #Initialise variables
-SA_NAME="bootstrap-tb-sa"
+SA_NAME="bootstrap-sa"
 SA_EMAIL=${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com
 FOLDER_ID=${root_id}
 echo "Folder is ${FOLDER_ID}"
@@ -75,7 +77,7 @@ done
 
 apply_failures=0
 while [ $apply_failures -lt $MAX_ATTEMPTS ]; do
-terraform apply -var-file input.tfvars -auto-approve
+terraform apply -var-file input.tfvars  -var "tb_discriminator=${TB_DISCRIMINATOR}"  -auto-approve
 if [ $? -eq 0 ]; then
 echo "Landing Zone successfully deployed."
 break
