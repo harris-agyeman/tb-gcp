@@ -25,7 +25,7 @@
 {% set enableStatusWaiter = hasExternalIP %}
 {% set bucketName = "%s-tf-export" % tbDiscriminator %}
 {% set tbNetwork = "bootstrap-network-%s" % tbDiscriminator %}
-{% set tbSubNetwork = "%bootstrap-sub-network-%s" % tbDiscriminator %}
+{% set tbSubNetwork = "bootstrap-sub-network-%s" % tbDiscriminator %}
 {% set rootId = properties["rootId"] %}
 {% set billingAccountId = properties["billingAccountId"] %}
 {% set allowIapFw = "allow-iap-%s" % tbDiscriminator %}
