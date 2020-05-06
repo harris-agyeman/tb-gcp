@@ -12,17 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-variable "region" {
-  type        = string
-  default     = "europe-west2"
-  description = "region name."
-}
-
-variable "region_zone" {
-  type        = string
-  default     = "europe-west2-a"
-  description = "zone name in the region provided."
-}
 
 variable "root_id" {
   type        = string

@@ -17,9 +17,6 @@
 module "simple-folder-example" {
   source = "../../"
 
-  region      = var.region
-  region_zone = var.region_zone
-
   root_id     = var.root_id
 }
 
