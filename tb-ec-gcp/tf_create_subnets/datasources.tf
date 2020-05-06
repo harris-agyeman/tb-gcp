@@ -13,5 +13,5 @@
 # limitations under the License.
 
 data "google_compute_network" "shared" {
-  name = "${var.shared_network_name}"
+  name = var.shared_network_name
 }
