@@ -12,9 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "google_project_services" "project" {
+
+module "host-project" {
+  source = "terraform-google-modules/project-factory/google//modules/project_services"
+  version = "4.0.0"
+
   project = var.host_project_id
-  services = [
+
+  activate_apis = [
     "cloudbilling.googleapis.com",
     "cloudkms.googleapis.com",
     "cloudresourcemanager.googleapis.com",
@@ -32,29 +37,14 @@ resource "google_project_services" "project" {
   ]
 }
 
-/*
-resource "google_project_services" "ec_project" {
-  project = "${var.ec_project_id}"
-  services   = ["compute.googleapis.com", "oslogin.googleapis.com", "container.googleapis.com"]
-  depends_on = ["google_project_services.project"]
-}
-*/
+module "service-project" {
+  source = "terraform-google-modules/project-factory/google//modules/project_services"
+  version = "4.0.0"
 
-resource "google_project_service" "bastion-iap" {
-  project = var.bastion_project_id
-  service = "iap.googleapis.com"
-  depends_on = ["google_project_services.project"]
-}
-resource "google_project_service" "bastion-recommender" {
-  project = var.bastion_project_id
-  service = "recommender.googleapis.com"
-  depends_on = ["google_project_services.project"]
-}
-
-resource "google_project_services" "project_shared" {
-  count   = var.service_projects_number
+  count = var.service_projects_number
   project = var.service_project_ids[count.index]
-  services = [
+
+  activate_apis = [
     "appengine.googleapis.com",
     "cloudbilling.googleapis.com",
     "cloudkms.googleapis.com",
@@ -74,6 +64,22 @@ resource "google_project_services" "project_shared" {
     "sqladmin.googleapis.com",
     "storage-api.googleapis.com",
   ]
-  depends_on = [google_project_services.project]
+  depends_on = [
+    module.host-project.project_id]
 }
+
+resource "google_project_service" "bastion-iap" {
+  project = var.bastion_project_id
+  service = "iap.googleapis.com"
+  depends_on = [
+    module.host-project.project_id]
+}
+resource "google_project_service" "bastion-recommender" {
+  project = var.bastion_project_id
+  service = "recommender.googleapis.com"
+  depends_on = [
+    module.host-project.project_id]
+}
+
+
 
