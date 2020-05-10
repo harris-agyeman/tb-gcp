@@ -64,21 +64,15 @@ module "service-project" {
     "sqladmin.googleapis.com",
     "storage-api.googleapis.com",
   ]
-  depends_on = [
-    module.host-project.project_id]
 }
 
 resource "google_project_service" "bastion-iap" {
   project = var.bastion_project_id
   service = "iap.googleapis.com"
-  depends_on = [
-    module.host-project.project_id]
 }
 resource "google_project_service" "bastion-recommender" {
   project = var.bastion_project_id
   service = "recommender.googleapis.com"
-  depends_on = [
-    module.host-project.project_id]
 }
 
 
